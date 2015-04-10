@@ -1,0 +1,942 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="MopligModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="MopligModelStoreContainer">
+          <EntitySet Name="Applications" EntityType="MopligModel.Store.Applications" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Company" EntityType="MopligModel.Store.Company" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="IPtoCountry" EntityType="MopligModel.Store.IPtoCountry" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="License" EntityType="MopligModel.Store.License" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Memberships" EntityType="MopligModel.Store.Memberships" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Messages" EntityType="MopligModel.Store.Messages" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Profiles" EntityType="MopligModel.Store.Profiles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Responses" EntityType="MopligModel.Store.Responses" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Roles" EntityType="MopligModel.Store.Roles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Sessions" EntityType="MopligModel.Store.Sessions" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Users" EntityType="MopligModel.Store.Users" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="UsersInRoles" EntityType="MopligModel.Store.UsersInRoles" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_License_Company" Association="MopligModel.Store.FK_License_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="License" EntitySet="License" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Message_Session" Association="MopligModel.Store.FK_Message_Session">
+            <End Role="Sessions" EntitySet="Sessions" />
+            <End Role="Messages" EntitySet="Messages" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Responses_Company" Association="MopligModel.Store.FK_Responses_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Responses" EntitySet="Responses" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Session_User" Association="MopligModel.Store.FK_Session_User">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Sessions" EntitySet="Sessions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Company" Association="MopligModel.Store.FK_Users_Company">
+            <End Role="Company" EntitySet="Company" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="MembershipApplication" Association="MopligModel.Store.MembershipApplication">
+            <End Role="Applications" EntitySet="Applications" />
+            <End Role="Memberships" EntitySet="Memberships" />
+          </AssociationSet>
+          <AssociationSet Name="MembershipUser" Association="MopligModel.Store.MembershipUser">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Memberships" EntitySet="Memberships" />
+          </AssociationSet>
+          <AssociationSet Name="RoleApplication" Association="MopligModel.Store.RoleApplication">
+            <End Role="Applications" EntitySet="Applications" />
+            <End Role="Roles" EntitySet="Roles" />
+          </AssociationSet>
+          <AssociationSet Name="UserApplication" Association="MopligModel.Store.UserApplication">
+            <End Role="Applications" EntitySet="Applications" />
+            <End Role="Users" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="UserProfile" Association="MopligModel.Store.UserProfile">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Profiles" EntitySet="Profiles" />
+          </AssociationSet>
+          <AssociationSet Name="UsersInRoleRole" Association="MopligModel.Store.UsersInRoleRole">
+            <End Role="Roles" EntitySet="Roles" />
+            <End Role="UsersInRoles" EntitySet="UsersInRoles" />
+          </AssociationSet>
+          <AssociationSet Name="UsersInRoleUser" Association="MopligModel.Store.UsersInRoleUser">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UsersInRoles" EntitySet="UsersInRoles" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Applications">
+          <Key>
+            <PropertyRef Name="ApplicationId" />
+          </Key>
+          <Property Name="ApplicationName" Type="nvarchar" Nullable="false" MaxLength="235" />
+          <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Description" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FullName" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="CodeName" Type="nvarchar" MaxLength="20" />
+          <Property Name="RegDate" Type="datetime" Nullable="false" />
+          <Property Name="logo" Type="image" />
+        </EntityType>
+        <EntityType Name="IPtoCountry">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="StartAddress" Type="bigint" />
+          <Property Name="EndAddress" Type="bigint" />
+          <Property Name="Registry" Type="nvarchar" Nullable="false" MaxLength="10" />
+          <Property Name="Assigned" Type="nvarchar" Nullable="false" MaxLength="12" />
+          <Property Name="Ctry" Type="nvarchar" Nullable="false" MaxLength="2" />
+          <Property Name="CNTRY" Type="nvarchar" Nullable="false" MaxLength="3" />
+          <Property Name="Country" Type="nvarchar" Nullable="false" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="License">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
+          <Property Name="MaxOperators" Type="int" Nullable="false" />
+          <Property Name="CompanyID" Type="int" Nullable="false" />
+          <Property Name="TypeOfLicense" Type="int" Nullable="false" />
+          <Property Name="AmountPaid" Type="money" />
+          <Property Name="Currency" Type="nvarchar" MaxLength="3" />
+          <Property Name="TransactionDate" Type="datetime" />
+          <Property Name="TransactionDetails" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="Memberships">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="PasswordFormat" Type="int" Nullable="false" />
+          <Property Name="PasswordSalt" Type="nvarchar" Nullable="false" MaxLength="128" />
+          <Property Name="Email" Type="nvarchar" MaxLength="256" />
+          <Property Name="PasswordQuestion" Type="nvarchar" MaxLength="256" />
+          <Property Name="PasswordAnswer" Type="nvarchar" MaxLength="128" />
+          <Property Name="IsApproved" Type="bit" Nullable="false" />
+          <Property Name="IsLockedOut" Type="bit" Nullable="false" />
+          <Property Name="CreateDate" Type="datetime" Nullable="false" />
+          <Property Name="LastLoginDate" Type="datetime" Nullable="false" />
+          <Property Name="LastPasswordChangedDate" Type="datetime" Nullable="false" />
+          <Property Name="LastLockoutDate" Type="datetime" Nullable="false" />
+          <Property Name="FailedPasswordAttemptCount" Type="int" Nullable="false" />
+          <Property Name="FailedPasswordAttemptWindowStart" Type="datetime" Nullable="false" />
+          <Property Name="FailedPasswordAnswerAttemptCount" Type="int" Nullable="false" />
+          <Property Name="FailedPasswordAnswerAttemptWindowsStart" Type="datetime" Nullable="false" />
+          <Property Name="Comment" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="Messages">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Text" Type="nvarchar" MaxLength="1000" />
+          <Property Name="SessionID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Profiles">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="PropertyNames" Type="nvarchar" Nullable="false" />
+          <Property Name="PropertyValueStrings" Type="nvarchar" Nullable="false" />
+          <Property Name="PropertyValueBinary" Type="image" Nullable="false" />
+          <Property Name="LastUpdatedDate" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Responses">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Value" Type="nvarchar" Nullable="false" MaxLength="1000" />
+          <Property Name="CompanyID" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Roles">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoleName" Type="nvarchar" Nullable="false" MaxLength="256" />
+          <Property Name="Description" Type="nvarchar" MaxLength="256" />
+        </EntityType>
+        <EntityType Name="Sessions">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" />
+          <Property Name="UserID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Client" Type="nvarchar" Nullable="false" MaxLength="100" />
+          <Property Name="Country" Type="nvarchar" MaxLength="50" />
+          <Property Name="Question" Type="nvarchar" MaxLength="1000" />
+          <Property Name="UserAgent" Type="nvarchar" MaxLength="250" />
+          <Property Name="CurrentURL" Type="nvarchar" MaxLength="250" />
+          <Property Name="Email" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="ApplicationId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="UserName" Type="nvarchar" Nullable="false" MaxLength="50" />
+          <Property Name="IsAnonymous" Type="bit" Nullable="false" />
+          <Property Name="LastActivityDate" Type="datetime" Nullable="false" />
+          <Property Name="companyID" Type="int" />
+        </EntityType>
+        <EntityType Name="UsersInRoles">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_License_Company">
+          <End Role="Company" Type="MopligModel.Store.Company" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="License" Type="MopligModel.Store.License" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="License">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Message_Session">
+          <End Role="Sessions" Type="MopligModel.Store.Sessions" Multiplicity="1" />
+          <End Role="Messages" Type="MopligModel.Store.Messages" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Sessions">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Messages">
+              <PropertyRef Name="SessionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Responses_Company">
+          <End Role="Company" Type="MopligModel.Store.Company" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Responses" Type="MopligModel.Store.Responses" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Responses">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Session_User">
+          <End Role="Users" Type="MopligModel.Store.Users" Multiplicity="1" />
+          <End Role="Sessions" Type="MopligModel.Store.Sessions" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Sessions">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Company">
+          <End Role="Company" Type="MopligModel.Store.Company" Multiplicity="0..1" />
+          <End Role="Users" Type="MopligModel.Store.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="companyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MembershipApplication">
+          <End Role="Applications" Type="MopligModel.Store.Applications" Multiplicity="1" />
+          <End Role="Memberships" Type="MopligModel.Store.Memberships" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="Memberships">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MembershipUser">
+          <End Role="Users" Type="MopligModel.Store.Users" Multiplicity="1" />
+          <End Role="Memberships" Type="MopligModel.Store.Memberships" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Memberships">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RoleApplication">
+          <End Role="Applications" Type="MopligModel.Store.Applications" Multiplicity="1" />
+          <End Role="Roles" Type="MopligModel.Store.Roles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="Roles">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserApplication">
+          <End Role="Applications" Type="MopligModel.Store.Applications" Multiplicity="1" />
+          <End Role="Users" Type="MopligModel.Store.Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Applications">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="Users">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserProfile">
+          <End Role="Users" Type="MopligModel.Store.Users" Multiplicity="1" />
+          <End Role="Profiles" Type="MopligModel.Store.Profiles" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Profiles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UsersInRoleRole">
+          <End Role="Roles" Type="MopligModel.Store.Roles" Multiplicity="1" />
+          <End Role="UsersInRoles" Type="MopligModel.Store.UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Roles">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="UsersInRoles">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UsersInRoleUser">
+          <End Role="Users" Type="MopligModel.Store.Users" Multiplicity="1" />
+          <End Role="UsersInRoles" Type="MopligModel.Store.UsersInRoles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UsersInRoles">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="MopligModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="MopligEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Applications" EntityType="MopligModel.Application" />
+          <EntitySet Name="Companies" EntityType="MopligModel.Company" />
+          <EntitySet Name="IPtoCountries" EntityType="MopligModel.IPtoCountry" />
+          <EntitySet Name="Memberships" EntityType="MopligModel.Membership" />
+          <EntitySet Name="Messages" EntityType="MopligModel.Message" />
+          <EntitySet Name="Profiles" EntityType="MopligModel.Profile" />
+          <EntitySet Name="Roles" EntityType="MopligModel.Role" />
+          <EntitySet Name="Sessions" EntityType="MopligModel.Session" />
+          <EntitySet Name="Users" EntityType="MopligModel.User" />
+          <AssociationSet Name="MembershipApplication" Association="MopligModel.MembershipApplication">
+            <End Role="Application" EntitySet="Applications" />
+            <End Role="Membership" EntitySet="Memberships" />
+          </AssociationSet>
+          <AssociationSet Name="RoleApplication" Association="MopligModel.RoleApplication">
+            <End Role="Application" EntitySet="Applications" />
+            <End Role="Role" EntitySet="Roles" />
+          </AssociationSet>
+          <AssociationSet Name="UserApplication" Association="MopligModel.UserApplication">
+            <End Role="Application" EntitySet="Applications" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Users_Company" Association="MopligModel.FK_Users_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <AssociationSet Name="MembershipUser" Association="MopligModel.MembershipUser">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Membership" EntitySet="Memberships" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Message_Session" Association="MopligModel.FK_Message_Session">
+            <End Role="Session" EntitySet="Sessions" />
+            <End Role="Message" EntitySet="Messages" />
+          </AssociationSet>
+          <AssociationSet Name="UserProfile" Association="MopligModel.UserProfile">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Profile" EntitySet="Profiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Session_User" Association="MopligModel.FK_Session_User">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Session" EntitySet="Sessions" />
+          </AssociationSet>
+          <AssociationSet Name="UsersInRoles" Association="MopligModel.UsersInRoles">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <EntitySet Name="Responses" EntityType="MopligModel.Respons" />
+          <AssociationSet Name="FK_Responses_Company" Association="MopligModel.FK_Responses_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="Respons" EntitySet="Responses" />
+          </AssociationSet>
+          <EntitySet Name="Licenses" EntityType="MopligModel.License" />
+          <AssociationSet Name="FK_License_Company" Association="MopligModel.FK_License_Company">
+            <End Role="Company" EntitySet="Companies" />
+            <End Role="License" EntitySet="Licenses" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Application">
+          <Key>
+            <PropertyRef Name="ApplicationId" />
+          </Key>
+          <Property Type="String" Name="ApplicationName" Nullable="false" MaxLength="235" FixedLength="false" Unicode="true" />
+          <Property Type="Guid" Name="ApplicationId" Nullable="false" />
+          <Property Type="String" Name="Description" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Memberships" Relationship="MopligModel.MembershipApplication" FromRole="Application" ToRole="Membership" />
+          <NavigationProperty Name="Roles" Relationship="MopligModel.RoleApplication" FromRole="Application" ToRole="Role" />
+          <NavigationProperty Name="Users" Relationship="MopligModel.UserApplication" FromRole="Application" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Company">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="FullName" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CodeName" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="RegDate" Nullable="false" />
+          <NavigationProperty Name="Users" Relationship="MopligModel.FK_Users_Company" FromRole="Company" ToRole="User" />
+          <NavigationProperty Name="Responses" Relationship="MopligModel.FK_Responses_Company" FromRole="Company" ToRole="Respons" />
+          <NavigationProperty Name="Licenses" Relationship="MopligModel.FK_License_Company" FromRole="Company" ToRole="License" />
+          <Property Type="Binary" Name="logo" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="IPtoCountry">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Int64" Name="StartAddress" />
+          <Property Type="Int64" Name="EndAddress" />
+          <Property Type="String" Name="Registry" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Assigned" Nullable="false" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Ctry" Nullable="false" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CNTRY" Nullable="false" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Country" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Membership">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Type="Guid" Name="ApplicationId" Nullable="false" />
+          <Property Type="Guid" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="PasswordFormat" Nullable="false" />
+          <Property Type="String" Name="PasswordSalt" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Email" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PasswordQuestion" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PasswordAnswer" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsApproved" Nullable="false" />
+          <Property Type="Boolean" Name="IsLockedOut" Nullable="false" />
+          <Property Type="DateTime" Name="CreateDate" Nullable="false" />
+          <Property Type="DateTime" Name="LastLoginDate" Nullable="false" />
+          <Property Type="DateTime" Name="LastPasswordChangedDate" Nullable="false" />
+          <Property Type="DateTime" Name="LastLockoutDate" Nullable="false" />
+          <Property Type="Int32" Name="FailedPasswordAttemptCount" Nullable="false" />
+          <Property Type="DateTime" Name="FailedPasswordAttemptWindowStart" Nullable="false" />
+          <Property Type="Int32" Name="FailedPasswordAnswerAttemptCount" Nullable="false" />
+          <Property Type="DateTime" Name="FailedPasswordAnswerAttemptWindowsStart" Nullable="false" />
+          <Property Type="String" Name="Comment" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Application" Relationship="MopligModel.MembershipApplication" FromRole="Membership" ToRole="Application" />
+          <NavigationProperty Name="User" Relationship="MopligModel.MembershipUser" FromRole="Membership" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Message">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Text" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="SessionID" Nullable="false" />
+          <NavigationProperty Name="Session" Relationship="MopligModel.FK_Message_Session" FromRole="Message" ToRole="Session" />
+        </EntityType>
+        <EntityType Name="Profile">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Type="Guid" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="PropertyNames" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="PropertyValueStrings" Nullable="false" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Type="Binary" Name="PropertyValueBinary" Nullable="false" MaxLength="Max" FixedLength="false" />
+          <Property Type="DateTime" Name="LastUpdatedDate" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="MopligModel.UserProfile" FromRole="Profile" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Type="Guid" Name="ApplicationId" Nullable="false" />
+          <Property Type="Guid" Name="RoleId" Nullable="false" />
+          <Property Type="String" Name="RoleName" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Description" MaxLength="256" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Application" Relationship="MopligModel.RoleApplication" FromRole="Role" ToRole="Application" />
+          <NavigationProperty Name="Users" Relationship="MopligModel.UsersInRoles" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Session">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="DateTime" Name="StartDate" Nullable="false" />
+          <Property Type="DateTime" Name="EndDate" />
+          <Property Type="Guid" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="Client" Nullable="false" MaxLength="100" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Messages" Relationship="MopligModel.FK_Message_Session" FromRole="Session" ToRole="Message" />
+          <NavigationProperty Name="User" Relationship="MopligModel.FK_Session_User" FromRole="Session" ToRole="User" />
+          <Property Type="String" Name="Country" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Question" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="UserAgent" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="CurrentURL" MaxLength="250" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="Email" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Type="Guid" Name="ApplicationId" Nullable="false" />
+          <Property Type="Guid" Name="UserId" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Type="Boolean" Name="IsAnonymous" Nullable="false" />
+          <Property Type="DateTime" Name="LastActivityDate" Nullable="false" />
+          <Property Type="Int32" Name="companyID" />
+          <NavigationProperty Name="Application" Relationship="MopligModel.UserApplication" FromRole="User" ToRole="Application" />
+          <NavigationProperty Name="Company" Relationship="MopligModel.FK_Users_Company" FromRole="User" ToRole="Company" />
+          <NavigationProperty Name="Membership" Relationship="MopligModel.MembershipUser" FromRole="User" ToRole="Membership" />
+          <NavigationProperty Name="Profile" Relationship="MopligModel.UserProfile" FromRole="User" ToRole="Profile" />
+          <NavigationProperty Name="Sessions" Relationship="MopligModel.FK_Session_User" FromRole="User" ToRole="Session" />
+          <NavigationProperty Name="Roles" Relationship="MopligModel.UsersInRoles" FromRole="User" ToRole="Role" />
+        </EntityType>
+        <Association Name="MembershipApplication">
+          <End Type="MopligModel.Application" Role="Application" Multiplicity="1" />
+          <End Type="MopligModel.Membership" Role="Membership" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Application">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="Membership">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="RoleApplication">
+          <End Type="MopligModel.Application" Role="Application" Multiplicity="1" />
+          <End Type="MopligModel.Role" Role="Role" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Application">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="Role">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserApplication">
+          <End Type="MopligModel.Application" Role="Application" Multiplicity="1" />
+          <End Type="MopligModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Application">
+              <PropertyRef Name="ApplicationId" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="ApplicationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Users_Company">
+          <End Type="MopligModel.Company" Role="Company" Multiplicity="0..1" />
+          <End Type="MopligModel.User" Role="User" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="User">
+              <PropertyRef Name="companyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="MembershipUser">
+          <End Type="MopligModel.User" Role="User" Multiplicity="1" />
+          <End Type="MopligModel.Membership" Role="Membership" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Membership">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Message_Session">
+          <End Type="MopligModel.Session" Role="Session" Multiplicity="1" />
+          <End Type="MopligModel.Message" Role="Message" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Session">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Message">
+              <PropertyRef Name="SessionID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserProfile">
+          <End Type="MopligModel.User" Role="User" Multiplicity="1" />
+          <End Type="MopligModel.Profile" Role="Profile" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Profile">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Session_User">
+          <End Type="MopligModel.User" Role="User" Multiplicity="1" >
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Type="MopligModel.Session" Role="Session" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Session">
+              <PropertyRef Name="UserID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UsersInRoles">
+          <End Type="MopligModel.Role" Role="Role" Multiplicity="*" />
+          <End Type="MopligModel.User" Role="User" Multiplicity="*" />
+        </Association>
+        <EntityType Name="Respons">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="Value" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Type="Int32" Name="CompanyID" Nullable="false" />
+          <NavigationProperty Name="Company" Relationship="MopligModel.FK_Responses_Company" FromRole="Respons" ToRole="Company" />
+        </EntityType>
+        <Association Name="FK_Responses_Company">
+          <End Type="MopligModel.Company" Role="Company" Multiplicity="1" />
+          <End Type="MopligModel.Respons" Role="Respons" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Respons">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="License">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Int32" Name="ID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="DateTime" Name="StartDate" Nullable="false" />
+          <Property Type="DateTime" Name="EndDate" Nullable="false" />
+          <Property Type="Int32" Name="MaxOperators" Nullable="false" />
+          <Property Type="Int32" Name="CompanyID" Nullable="false" />
+          <Property Type="Int32" Name="TypeOfLicense" Nullable="false" />
+          <Property Type="Decimal" Name="AmountPaid" Precision="19" Scale="4" />
+          <Property Type="String" Name="Currency" MaxLength="3" FixedLength="false" Unicode="true" />
+          <Property Type="DateTime" Name="TransactionDate" />
+          <Property Type="String" Name="TransactionDetails" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Company" Relationship="MopligModel.FK_License_Company" FromRole="License" ToRole="Company" />
+        </EntityType>
+        <Association Name="FK_License_Company">
+          <End Type="MopligModel.Company" Role="Company" Multiplicity="1" />
+          <End Type="MopligModel.License" Role="License" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Company">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="License">
+              <PropertyRef Name="CompanyID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="MopligModelStoreContainer" CdmEntityContainer="MopligEntities">
+          <EntitySetMapping Name="Applications">
+            <EntityTypeMapping TypeName="MopligModel.Application">
+              <MappingFragment StoreEntitySet="Applications">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+                <ScalarProperty Name="ApplicationName" ColumnName="ApplicationName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Companies">
+            <EntityTypeMapping TypeName="MopligModel.Company">
+              <MappingFragment StoreEntitySet="Company">
+                <ScalarProperty Name="logo" ColumnName="logo" />
+                <ScalarProperty Name="RegDate" ColumnName="RegDate" />
+                <ScalarProperty Name="CodeName" ColumnName="CodeName" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IPtoCountries">
+            <EntityTypeMapping TypeName="MopligModel.IPtoCountry">
+              <MappingFragment StoreEntitySet="IPtoCountry">
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="CNTRY" ColumnName="CNTRY" />
+                <ScalarProperty Name="Ctry" ColumnName="Ctry" />
+                <ScalarProperty Name="Assigned" ColumnName="Assigned" />
+                <ScalarProperty Name="Registry" ColumnName="Registry" />
+                <ScalarProperty Name="EndAddress" ColumnName="EndAddress" />
+                <ScalarProperty Name="StartAddress" ColumnName="StartAddress" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Memberships">
+            <EntityTypeMapping TypeName="MopligModel.Membership">
+              <MappingFragment StoreEntitySet="Memberships">
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="FailedPasswordAnswerAttemptWindowsStart" ColumnName="FailedPasswordAnswerAttemptWindowsStart" />
+                <ScalarProperty Name="FailedPasswordAnswerAttemptCount" ColumnName="FailedPasswordAnswerAttemptCount" />
+                <ScalarProperty Name="FailedPasswordAttemptWindowStart" ColumnName="FailedPasswordAttemptWindowStart" />
+                <ScalarProperty Name="FailedPasswordAttemptCount" ColumnName="FailedPasswordAttemptCount" />
+                <ScalarProperty Name="LastLockoutDate" ColumnName="LastLockoutDate" />
+                <ScalarProperty Name="LastPasswordChangedDate" ColumnName="LastPasswordChangedDate" />
+                <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+                <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+                <ScalarProperty Name="IsLockedOut" ColumnName="IsLockedOut" />
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+                <ScalarProperty Name="PasswordAnswer" ColumnName="PasswordAnswer" />
+                <ScalarProperty Name="PasswordQuestion" ColumnName="PasswordQuestion" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+                <ScalarProperty Name="PasswordFormat" ColumnName="PasswordFormat" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Messages">
+            <EntityTypeMapping TypeName="MopligModel.Message">
+              <MappingFragment StoreEntitySet="Messages">
+                <ScalarProperty Name="SessionID" ColumnName="SessionID" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Profiles">
+            <EntityTypeMapping TypeName="MopligModel.Profile">
+              <MappingFragment StoreEntitySet="Profiles">
+                <ScalarProperty Name="LastUpdatedDate" ColumnName="LastUpdatedDate" />
+                <ScalarProperty Name="PropertyValueBinary" ColumnName="PropertyValueBinary" />
+                <ScalarProperty Name="PropertyValueStrings" ColumnName="PropertyValueStrings" />
+                <ScalarProperty Name="PropertyNames" ColumnName="PropertyNames" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="MopligModel.Role">
+              <MappingFragment StoreEntitySet="Roles">
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sessions">
+            <EntityTypeMapping TypeName="MopligModel.Session">
+              <MappingFragment StoreEntitySet="Sessions">
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="CurrentURL" ColumnName="CurrentURL" />
+                <ScalarProperty Name="UserAgent" ColumnName="UserAgent" />
+                <ScalarProperty Name="Question" ColumnName="Question" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Client" ColumnName="Client" />
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="MopligModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="companyID" ColumnName="companyID" />
+                <ScalarProperty Name="LastActivityDate" ColumnName="LastActivityDate" />
+                <ScalarProperty Name="IsAnonymous" ColumnName="IsAnonymous" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="UsersInRoles" TypeName="MopligModel.UsersInRoles" StoreEntitySet="UsersInRoles">
+            <EndProperty Name="User">
+              <ScalarProperty Name="UserId" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="Role">
+              <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="Responses">
+            <EntityTypeMapping TypeName="MopligModel.Respons">
+              <MappingFragment StoreEntitySet="Responses">
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="Value" ColumnName="Value" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Licenses">
+            <EntityTypeMapping TypeName="MopligModel.License">
+              <MappingFragment StoreEntitySet="License">
+                <ScalarProperty Name="TransactionDetails" ColumnName="TransactionDetails" />
+                <ScalarProperty Name="TransactionDate" ColumnName="TransactionDate" />
+                <ScalarProperty Name="Currency" ColumnName="Currency" />
+                <ScalarProperty Name="AmountPaid" ColumnName="AmountPaid" />
+                <ScalarProperty Name="TypeOfLicense" ColumnName="TypeOfLicense" />
+                <ScalarProperty Name="CompanyID" ColumnName="CompanyID" />
+                <ScalarProperty Name="MaxOperators" ColumnName="MaxOperators" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Moplig">
+        <EntityTypeShape EntityType="MopligModel.Application" Width="1.5" PointX="0.75" PointY="5.875" Height="2.1725878906250102" />
+        <EntityTypeShape EntityType="MopligModel.Company" Width="1.5" PointX="3" PointY="14.875" Height="1.9802864583333264" />
+        <EntityTypeShape EntityType="MopligModel.IPtoCountry" Width="1.5" PointX="0.75" PointY="0.75" Height="2.5571907552083246" />
+        <EntityTypeShape EntityType="MopligModel.Membership" Width="1.5" PointX="3" PointY="4.375" Height="5.05710937500001" />
+        <EntityTypeShape EntityType="MopligModel.Message" Width="1.5" PointX="9.75" PointY="10.375" Height="1.7879850260416674" />
+        <EntityTypeShape EntityType="MopligModel.Profile" Width="1.5" PointX="7.5" PointY="7.125" Height="2.172587890624996" />
+        <EntityTypeShape EntityType="MopligModel.Role" Width="1.5" PointX="3" PointY="11.625" Height="2.1725878906250102" />
+        <EntityTypeShape EntityType="MopligModel.Session" Width="1.5" PointX="7.5" PointY="10.125" Height="2.3648893229166674" />
+        <EntityTypeShape EntityType="MopligModel.User" Width="1.5" PointX="5.25" PointY="8.125" Height="3.3263964843750102" />
+        <AssociationConnector Association="MopligModel.MembershipApplication" >
+          <ConnectorPoint PointX="2.25" PointY="6.9612939453125051" />
+          <ConnectorPoint PointX="3" PointY="6.9612939453125051" />
+        </AssociationConnector>
+        <AssociationConnector Association="MopligModel.RoleApplication" >
+          <ConnectorPoint PointX="1.5" PointY="8.04758789062501" />
+          <ConnectorPoint PointX="1.5" PointY="12.711293945312505" />
+          <ConnectorPoint PointX="3" PointY="12.711293945312505" />
+        </AssociationConnector>
+        <AssociationConnector Association="MopligModel.UserApplication" >
+          <ConnectorPoint PointX="1.9062525" PointY="8.04758789062501" />
+          <ConnectorPoint PointX="1.9062525" PointY="10.473002429687512" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="10.473002429687512" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="10.473002429687512" />
+          <ConnectorPoint PointX="5.25" PointY="10.473002429687512" />
+        </AssociationConnector>
+        <AssociationConnector Association="MopligModel.FK_Users_Company" >
+          <ConnectorPoint PointX="4.5" PointY="14.876152846153847" />
+          <ConnectorPoint PointX="4.875" PointY="14.501152846153847" />
+          <ConnectorPoint PointX="4.875" PointY="9.7881982421875051" />
+          <ConnectorPoint PointX="5.25" PointY="9.7881982421875051" />
+        </AssociationConnector>
+        <AssociationConnector Association="MopligModel.MembershipUser" >
+          <ConnectorPoint PointX="5.25" PointY="8.7785546875000051" />
+          <ConnectorPoint PointX="4.5" PointY="8.7785546875000051" />
+        </AssociationConnector>
+        <AssociationConnector Association="MopligModel.FK_Message_Session" >
+          <ConnectorPoint PointX="9" PointY="11.268992513020834" />
+          <ConnectorPoint PointX="9.75" PointY="11.268992513020834" />
+        </AssociationConnector>
+        <AssociationConnector Association="MopligModel.UserProfile" >
+          <ConnectorPoint PointX="6.75" PointY="8.711293945312498" />
+          <ConnectorPoint PointX="7.5" PointY="8.711293945312498" />
+        </AssociationConnector>
+        <AssociationConnector Association="MopligModel.FK_Session_User" >
+          <ConnectorPoint PointX="6.75" PointY="10.788198242187505" />
+          <ConnectorPoint PointX="7.5" PointY="10.788198242187505" />
+        </AssociationConnector>
+        <AssociationConnector Association="MopligModel.UsersInRoles" >
+          <ConnectorPoint PointX="4.5" PointY="12.711293945312505" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="12.711293945312505" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="12.711293945312505" />
+          <ConnectorPoint PointX="5.5937475" PointY="12.711293945312505" />
+          <ConnectorPoint PointX="5.5937475" PointY="11.45139648437501" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="MopligModel.Respons" Width="1.5" PointX="5.25" PointY="15.125" Height="1.7879850260416657" />
+        <AssociationConnector Association="MopligModel.FK_Responses_Company" >
+          <ConnectorPoint PointX="4.5" PointY="16.018992513020834" />
+          <ConnectorPoint PointX="5.25" PointY="16.018992513020834" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="MopligModel.License" Width="1.5" PointX="5.25" PointY="18.5" Height="3.1340950520833317" />
+        <AssociationConnector Association="MopligModel.FK_License_Company" >
+          <ConnectorPoint PointX="3.75" PointY="17.239889322916667" />
+          <ConnectorPoint PointX="3.75" PointY="20.067047526041666" />
+          <ConnectorPoint PointX="5.25" PointY="20.067047526041666" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

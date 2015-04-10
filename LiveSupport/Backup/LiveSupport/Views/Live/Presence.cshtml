@@ -1,0 +1,38 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>Presence</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.signalR.js")"></script>
+    <script type="text/javascript" src="/signalr/hubs"></script>
+    <script type="text/javascript">
+        $(function () {
+            chat = $.connection.liveSupport;
+            $.connection.hub.start( 
+                 function () {
+                     var userBrowser = {
+                         UserAgent: navigator.userAgent,
+                         OS: "Windows",
+                         Name: navigator.appName,
+                         CurrentPage: '@Html.Raw(ViewBag.CurrentPage)',
+                         Version: "11",
+                         IP: '@Html.Raw(ViewBag.IPAddress)'
+                     };
+                     chat.available('@Html.Raw(ViewBag.Company)', userBrowser);
+                 });
+
+                 chat.invite = function () {
+                     parent.postMessage("Invite", "*");
+                 }
+        });
+    </script>
+</head>
+<body>
+
+</body>
+</html>

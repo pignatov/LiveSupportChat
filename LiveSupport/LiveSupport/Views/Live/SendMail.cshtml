@@ -1,0 +1,78 @@
+﻿@model LiveSupport.Models.EmailModel
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <title>SendMail</title>
+</head>
+<body>
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<style>
+    body {
+        background-color: #5C87B2;
+        color: #696969;
+        font-family: Verdana,Tahoma,Arial,"Helvetica Neue",Helvetica,Sans-Serif;
+        font-size: 75%;
+        margin: 0;
+        padding: 0;
+    }    
+    .page {
+        margin-left: auto;
+        margin-right: auto;
+        width: 90%;
+    }   
+    #main {
+    background-color: #FFFFFF;
+    margin-bottom: 0;
+    padding: 30px 30px 15px;
+} 
+</style>
+
+<div class="page">
+<div id="main">
+<h3>No operators are available right now. You may leave a message and we will contact you shortly</h3>
+@using (Html.BeginForm()) {
+    @Html.ValidationSummary(true, "Please correct the errors and try again.")
+    <div>
+        <fieldset>
+            <legend>Send your question</legend>
+
+            <div class="editor-label">
+                @Html.LabelFor(m => m.Name)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.Name)
+                @Html.ValidationMessageFor(m => m.Name)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(m => m.Email)
+            </div>
+            <div class="editor-field">
+                @Html.TextBoxFor(m => m.Email)
+                @Html.ValidationMessageFor(m => m.Email)
+            </div>
+
+            <div class="editor-label">
+                @Html.LabelFor(m => m.Question)
+            </div>
+            <div class="editor-field">
+                @Html.TextAreaFor(m => m.Question)
+                @Html.ValidationMessageFor(m => m.Question)
+            </div>
+            <p>
+                <input type="submit" value="Send" />
+            </p>
+        </fieldset>
+    </div>
+}
+</div>
+</div>
+</body>
+</html>

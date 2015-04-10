@@ -1,0 +1,49 @@
+﻿@model LiveSupport.Data.Company
+@{
+    ViewBag.Title = "Company";
+}
+
+<h2>Company</h2>
+
+@Html.Partial("Navigation")
+
+<fieldset>
+    <legend>@Model.FullName</legend>
+    <table>
+        <tbody>
+            <tr>
+                <th>Registered operators</th>
+                <td>@Model.Users.Count</td>
+            </tr>
+            <tr>
+                <th>Registration date</th>
+                <td>@Model.RegDate</td>
+            </tr>
+            <tr>
+                <th>Max operators</th>
+                <td>@Model.Licenses.OrderByDescending(a=>a.StartDate).FirstOrDefault().MaxOperators</td>
+            </tr>
+            <tr>
+                <th>License expires</th>
+                <td>@Model.Licenses.OrderByDescending(a=>a.StartDate).FirstOrDefault().EndDate</td>
+            </tr>
+            <tr>
+                <th>Max operators</th>
+                <td>
+                @{
+                    switch (@Model.Licenses.OrderByDescending(a=>a.StartDate).FirstOrDefault().TypeOfLicense)
+                    {
+                        case (int)LiveSupport.Data.License.LicenseType.Trial: <text>Trial</text> break;
+                        case (int)LiveSupport.Data.License.LicenseType.Regular: <text>Regular</text> break;
+                        case (int)LiveSupport.Data.License.LicenseType.Discounted: <text>Discounted</text> break;                                                                                                                                                              
+                    }
+                }
+                    
+                </td>
+            </tr>
+        </tbody>
+    </table>
+  
+</fieldset>
+
+

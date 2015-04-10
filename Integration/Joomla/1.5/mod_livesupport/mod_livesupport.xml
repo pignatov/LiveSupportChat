@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<install type="module" version="1.5.0">
+	<name>Live Support Chat</name>
+	<author>Moplig.com</author>
+	<creationDate>February 2012</creationDate>
+	<copyright>Moplig.com</copyright>
+	<license>GNU/GPL</license>
+	<authorEmail>support@moplig.com</authorEmail>
+	<authorUrl>Moplig.com</authorUrl>
+	<version>1.0</version>
+	<description>This module displays Live Support Chat button on your site allowing for real-time communication with your visitors. Login into Control panel at http://websitechat.net - copy your Chat Button HTML code and paste it into filed on the right. For the best results set "Show Title" to "No" above.</description>
+	<files>
+		<filename module="mod_livesupport">mod_livesupport.php</filename>
+		<filename module="mod_livesupport">tmpl/default.php</filename>
+		<filename module="mod_livesupport">tmpl/index.html</filename>
+		<filename module="mod_livesupport">helper.php</filename>
+		<filename module="mod_livesupport">index.html</filename>
+ 	</files>
+	<params>
+	 <param name="live_support_button" type="textarea" default="" label="Chat Button HTML code" description="Paste Live Chat button HTML code here." rows="5" cols="40" />
+	</params>
+</install>

@@ -1,0 +1,62 @@
+﻿@{
+    ViewBag.Title = "FAQ";
+}
+
+<h2>FAQ</h2>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('h4').click(function () {
+            if ($(this).next().is(":visible")) {
+                $(this).next().hide();
+            }
+            else {
+                $(this).next().show();
+            }
+        });
+    });
+</script> 
+
+<style>
+#faq {
+    font-family: Helvetica;
+}
+#faq h4 {
+    color: #CF682F;
+    cursor: pointer;
+    font-size: 14px;
+    margin-bottom: 3px;
+    margin-top: 3px;
+}
+#faq h4:hover {
+    text-decoration: underline;
+}
+#faq div {
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+</style>
+
+<div id="faq">
+    <h4>How does moplig.com work?</h4>
+    <div style="text-align: justify; display: none;">moplig.com chat automatically detects the best way to communicate with the sever and distributes chat requests. Using state of the art technology moplig.com detects client disconnects and provides user feedback.</div>
+
+    <h4>How much does it cost?</h4>
+    <div style="text-align: justify; display: none;">You may find our competitive prices @Html.ActionLink("here", "Pricing", "Home") </div>
+
+    <h4>What browsers are supported?</h4>
+    <div style="text-align: justify; display: none;">We support all major browsers even when older versions are used. Works fine on 
+        <ul>
+            <li>IE 6+</li>
+            <li>FF 3.5+</li>
+            <li>Opera 9+</li>
+            <li>Chrome 9+</li>
+        </ul>
+    </div>
+
+    <h4>Can I receive messages if all operators are offline?</h4>
+    <div style="text-align: justify; display: none;">Yes. A web form is loaded, so your web site visitors can send you an e-mail</div>
+
+    <h4>Can I download a Joomla 1.x module?</h4>
+    <div style="text-align: justify; display: none;">Yes. We provide modules for Joomla 1.0 (compatible with Mambo 4.x) and Joomla 1.5 (compatible with 1.5 on).</div>
+</div>

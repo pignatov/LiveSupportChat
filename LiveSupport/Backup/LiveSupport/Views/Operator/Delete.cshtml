@@ -1,0 +1,19 @@
+﻿@model LiveSupport.Models.RegisterOperatorModel
+
+@{
+    ViewBag.Title = "Delete an operator";
+}
+
+<h2>Delete</h2>
+<p>
+    Are you sure you want to delete user @Model.UserName ?
+    <br />All sessions owned by this user will also be deleted.
+</p>
+    
+@using (Html.BeginForm())
+{
+    <p>
+    <input type="submit" value="Delete" /> | @Html.ActionLink("Back to List", "Index")
+    </p>
+}
+

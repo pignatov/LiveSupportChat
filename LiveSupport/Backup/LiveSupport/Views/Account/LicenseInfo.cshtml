@@ -1,0 +1,20 @@
+﻿@{
+    Layout = null;
+}
+@model LiveSupport.Data.License
+           
+<div id="licenseInfo">
+
+@if (Request.IsAuthenticated)
+{
+    switch (Model.TypeOfLicense)
+    {
+        case (int)LiveSupport.Data.License.LicenseType.Trial: <text>@Html.Raw("Trial license")</text> break;
+    }
+    <text> @Html.Raw((Model.EndDate - DateTime.Now).Days.ToString()) days left </text>
+}
+else { 
+    @Html.ActionLink("Try it FREE now", "Register", "Account")
+}
+</div>
+

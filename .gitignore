@@ -1,0 +1,32 @@
+# Compiled source #
+###################
+*.com
+*.class
+*.pdb
+*.exe
+*.o
+*.so
+
+# Logs and databases #
+######################
+*.log
+*.sql
+*.sqlite
+*.tlog
+*.cache
+LiveSupport/LiveSupport/obj/*
+LiveSupport/LiveSupport/bin/*
+LiveSupport/LiveSupport.Tests/bin/*
+LiveSupport/LiveSupport.Tests/obj/*
+
+
+# Others
+*.suo
+*.bak
+
+# OS generated files #
+######################
+.DS_Store*
+ehthumbs.db
+Icon?
+Thumbs.db

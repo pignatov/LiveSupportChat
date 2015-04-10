@@ -1,0 +1,34 @@
+﻿@{
+    ViewBag.Title = "Quick Start";
+}
+<style>
+    body
+    {
+        counter-reset: h3;
+    }
+h3:before {
+    content: "№" counter(h3, decimal) ". ";
+    counter-increment: h3;
+}
+</style>
+
+<h2>Quick Start</h2>
+
+<h3>Before you begin</h3>
+<p>First of all make sure you have access to the web site you want to add live chat support icon. Basic HTML skills are not required but may help in certain scenarios</p>
+
+<h3>Put the right type of code into the right place</h3>
+<p>Most of the time you will just paste a bunch of code somewhere on your page and everything will work just fine.
+<br />If all you need is a form for live chat and/ or feedback form when no operators are around use the first code snippet from @Html.ActionLink("Snippets", "Snippet", "Code"). Just paste it where you want the icon to appear on your site.
+<br />In order to track visitors and do proactive invitations you need to use the second code snippet. It may be placed anywhere on your page, just make sure you copy and paste all the lines.
+<br />In case you have a Joomla based web site you can download the appropriate plugin for your installation and follow the instructions
+</p>
+
+<h3>What to do next</h3>
+<p>Log in with your user credentials on moplig.com and click @Html.ActionLink("Support", "Answer", "Support") menu item.
+<br />Everything is pretty much self explanatory from now on - if a visitor wants support you can view his/ her request in the clients section and all online clients are located in the Online Clients section</p>
+
+<h3>What else can I do</h3>
+<p>You can add some canned responses from @Html.ActionLink("Responses", "Index", "Response") menu item or new operators from @Html.ActionLink("Operators", "Index", "Operator").
+<br />Check your @Html.ActionLink("settings", "Index", "Company") or profile to find additional options like logo, operator name and so on.</p>
+

@@ -1,0 +1,11 @@
+﻿@if(Request.IsAuthenticated) {
+    <text><b>@Context.User.Identity.Name</b>
+    @(User.IsInRole("Administrator") ? "(Administrator)" : String.Empty) 
+    @(User.IsInRole("Supervisor") ? "(Supervisor)" : String.Empty) 
+    @(User.IsInRole("Operator") ? "(Operator)" : String.Empty) 
+    [ @Html.ActionLink("Log Off", "LogOff", "Account") ]</text>
+    @Html.ActionLink(ViewRes.SharedStrings.ChangePassword, "ChangePassword", "Account")     
+}
+else {
+    @:[ @Html.ActionLink("Log On", "LogOn", "Account") ]
+}

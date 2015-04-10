@@ -1,0 +1,87 @@
+﻿@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html> 
+<head>
+    <title>Ask</title>
+    <script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+    <script type="text/javascript" src="@Url.Content("~/Scripts/jquery.signalR.min.js")"></script>
+    <script type="text/javascript" src="/signalr/hubs"></script>
+</head>
+<body>
+    <div>
+     <script type="text/javascript">
+         var chat;
+
+         $(function () {
+             // SignalR hub initialization
+             chat = $.connection.liveSupport;
+             $.connection.hub.start(
+                 function () {
+                     var userBrowser = {
+                        UserAgent: navigator.userAgent,
+                        OS: "Windows",
+                        Name: navigator.appName,
+                        Version: "11"
+                    };
+                     chat.init('@Html.Raw(ViewBag.SupportCompany)', userBrowser);
+                 }
+             );
+             // chat.init('Kontrax');
+
+             chat.receive = function (name, message) {
+                 $("#messages").append("<li> " + name + ": " + message + "</li>");
+             }
+         });
+
+
+     </script>    
+     <style>
+         ul
+         {
+             margin-left: -1em;
+         }
+         
+         ul li
+         {
+             margin-left: -1em;
+         }
+         
+         #chatContainer{
+            overflow:auto; 
+            height:150px;              
+            width:200px; 
+         }
+         
+         #chatBox
+         {
+            width:200px; 
+             display:block;
+             -moz-border-radius:5px;
+             -moz-border-radius:5px;                          
+             border-radius:5px;
+            -moz-box-shadow: 10px 10px 5px #888;
+            -webkit-box-shadow: 10px 10px 5px #888;
+            box-shadow: 10px 10px 5px #888;
+         }
+     </style>
+    </div>
+    <div>
+    <button id="btnStart" onclick=@Html.Raw("chat.init('"+ @Html.Raw(ViewBag.SupportCompany) +"');") >Init</button>
+    <button id="btnClose" onclick="chat.close();" >Close</button>
+    
+    <div id="chatBox">
+        <div id="chatContainer">
+            <ul id="messages" style="list-style-type:none; margin-left:-1em;"></ul>
+        </div>
+        <div id="buttons">
+            <textarea id="txtMessage" style="resize:none"> </textarea>
+            <button id="btnSendMessage" onclick="chat.name='plamen'; chat.sendMessage($('#txtMessage').val()); $('#txtMessage').val('');" >Send</button>
+        </div>
+    </div>
+    </div>
+</body>
+</html>

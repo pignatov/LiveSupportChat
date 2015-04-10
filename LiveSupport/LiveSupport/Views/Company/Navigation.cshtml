@@ -1,0 +1,32 @@
+﻿<style>
+    ul.vertical#menu li 
+    {
+        width:150px;
+        display:block;
+        text-align: left; 
+        margin: 5px;
+    }
+    
+    ul.vertical#menu li a
+    {
+        padding-top:2px;
+        padding-bottom:2px;        
+        display:block;
+        width:100%;
+    }
+    
+    div#navigation 
+    {
+        float:left;
+        width:200px;
+    }        
+       
+</style>
+<div id="navigation">
+    <ul id="menu" class="vertical">
+        <li>@Html.ActionLink("Company", "Index")</li>
+        <li>@Html.ActionLink("Logo", "Logo")</li>
+        <li>@Html.ActionLink("Details", "Details")</li>
+        <li>@Html.ActionLink("Purchase", "Buy")</li>
+    </ul>
+</div>
