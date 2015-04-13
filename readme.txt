@@ -1,8 +1,13 @@
 Moplig Live Support Chat
 ========================
+Prerequisities
+- SQL Server 
+
 Installation
 - Create Database Moplig and execute DB/database.sql and DB/IpToCountry.sql
-- Adjust connection strings in web.config if necessary
+- Adjust WebSite attribute in web.config
+  <LiveSupport NotificationSender="notify@moplig.com" WebSite="http://localhost:48806" />
+
 
 
 Usage:
